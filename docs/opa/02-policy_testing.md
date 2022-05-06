@@ -4,6 +4,8 @@
 
 为了帮助您验证您的策略的正确性，`OPA`还为您提供了一个框架，您可以用来编写策略测试。通过编写策略的测试，您可以加快新规则的开发过程，但需要优化时可减少修改规则所需的时间
 
+- [example](https://github.com/thinkgos/open-policy-agent-rego-example)
+
 ## Getting Started
 
 让我们使用一个例子来开始。下面的文件实现了一个简单的策略，允许创建新用户和用户访问自己的简介。
@@ -280,7 +282,7 @@ test_replace_rule {
 结果: 
 
 ```shell
-$   opa test -v authz_no_arguments.rego authz_no_arguments_test.rego
+$ opa test -v authz_no_arguments.rego authz_no_arguments_test.rego
 data.authz.test_replace_rule: PASS (328ns)
 --------------------------------------------------------------------------------
 PASS: 1/1

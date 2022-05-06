@@ -692,11 +692,11 @@ def hostnames(sites):
 >
 > ---
 >
-> +-----------------+--------+  
-> |      names      | region |  
-> +-----------------+--------+  
-> | ["smoke","dev"] | "west" |  
-> +-----------------+--------+  
+> +----------------------+----------+  
+> |      names           |  region  |  
+> +----------------------+----------+  
+> | ["smoke","dev"]   |  "west" |  
+> +----------------------+----------+  
 
 上面查询中,第二个表达式包含[Array Comprehension](https://www.openpolicyagent.org/docs/latest/policy-language/#array-comprehensions),它使用了`region`变量,`region`变量将在外部主体中绑定.
 
@@ -719,12 +719,12 @@ names = [site.name for site in sites if site.region == "west"]
 
 > ```python
 > app_to_hostnames[app_name] = hostnames {
->     app := apps[_]
->     app_name := app.name
->     hostnames := [hostname | name := app.servers[_]
->                             s := sites[_].servers[_]
->                             s.name == name
->                             hostname := s.hostname]
+>  app := apps[_]
+>  app_name := app.name
+>  hostnames := [hostname | name := app.servers[_]
+>                          s := sites[_].servers[_]
+>                          s.name == name
+>                          hostname := s.hostname]
 > }
 > ```
 >
@@ -736,13 +736,13 @@ names = [site.name for site in sites if site.region == "west"]
 >
 > ---
 >
-> +-----------+------------------------------------------------------+  
-> |    app    |                app_to_hostnames[app]                 |  
-> +-----------+------------------------------------------------------+  
-> | "mongodb" | ["oxygen"]                                           |  
-> | "mysql"   | ["lithium","carbon"]                                 |  
-> | "web"     | ["hydrogen","helium","beryllium","boron","nitrogen"] |  
-> +-----------+------------------------------------------------------+  
+> +----------------+--------------------------------------------------------------------+  
+> |    app          |                    app_to_hostnames[app]                          |  
+> +---------------+----------------------------------------------------------------------+  
+> | "mongodb" |     ["oxygen"]                                                                 |  
+> | "mysql"       |     ["lithium","carbon"]                                                    |  
+> | "web"          |    ["hydrogen","helium","beryllium","boron","nitrogen"] |  
+> +------------ --+------------------------------------------------------------------------+  
 
 ### Object Comprehensions
 
@@ -804,11 +804,11 @@ names = [site.name for site in sites if site.region == "west"]
 >
 > ---
 >
-> +---------------------+-------------+  
-> |          a          |      b      |  
-> +---------------------+-------------+  
-> | [1,2,3,4,3,4,3,4,5] | [1,2,3,4,5] |  
-> +---------------------+-------------+  
+> +--------------------------+--------------+  
+> |               a               |         b         |  
+> +--------------------------+---------------+  
+> |  [1,2,3,4,3,4,3,4,5]  |  [1,2,3,4,5]  |  
+> +--------------------------+---------------+  
 
 ## Rules
 
