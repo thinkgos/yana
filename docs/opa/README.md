@@ -1,5 +1,6 @@
+# Open Policy Agent
 
-` Open Policy Agent` (`OPA`, 发音 “oh-pa”) 是一个开源, 通用策略引擎,它统一了整个架构的策略实施. `OPA`提供了高层次声明式语言,可以可以将策略指定为代码和简单的API，从而将策略决策从软件中分离出来。您可以在微服务、Kubernetes、CI/CD 、API 网关等使用 `OPA` 作策略。
+` Open Policy Agent` (`OPA`, 发音 “oh-pa”) 是一个开源, 通用策略引擎,它统一了整个架构的策略实施. `OPA`提供了高层次声明式语言,可以将策略指定为代码和简单的API，从而将策略决策从软件中分离出来。您可以在微服务、Kubernetes、CI/CD 、API 网关等使用 `OPA` 作策略。
 
 阅读此页面以了解 `OPA `策略语言 (`Rego`) 中的核心概念，以及如何下载、运行和集成 OPA。
 
@@ -9,7 +10,7 @@
 
 ![img](https://d33wubrfki0l68.cloudfront.net/b394f524e15a67457b85fdfeed02ff3f2764eb9e/6ac2b/docs/latest/images/opa-service.svg)
 
-`OPA` 通过根据策略和数据评估查询输入来生成策略决策。 OPA 和 Rego 是领域无关的，所以你可以在你的策略中描述几乎任何类型的不变量。 例如：
+`OPA` 通过根据策略和数据评估查询输入来生成策略决策。 `OPA` 和 `Rego` 是领域无关的，所以你可以在你的策略中描述几乎任何类型的不变量。 例如：
 
 - 哪些用户可以访问哪些资源。
 - 允许哪些子网出口流量。
@@ -66,25 +67,9 @@
 
 当提供服务器、网络和端口并且合规团队希望定期审核系统以查找违反策略的服务器时，需要强制执行该策略。
 
-您的老板要求您确定 OPA 是否适合实施该政策。
+您的老板要求您确定 `OPA` 是否适合实施该政策。
 
+## Reference
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [Courses](https://academy.styra.com/courses/opa-rego)
+- [Courses @bilibili](https://www.bilibili.com/video/BV1v44y1572b?spm_id_from=333.999.0.0)
