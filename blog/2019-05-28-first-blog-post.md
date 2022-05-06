@@ -1,0 +1,12 @@
+---
+slug: first-blog-post
+title: First Blog Post
+authors:
+  name: thinkgos
+  title: things-go Core Team
+  url: https://github.com/thinkgos
+  image_url: https://github.com/thinkgos.png
+tags: [hola, docusaurus]
+---
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet
