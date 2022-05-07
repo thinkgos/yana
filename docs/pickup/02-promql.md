@@ -1,4 +1,4 @@
-# promQL: prometheus query language
+# PromQL: prometheus query language
 
 ## 一. Concepts
 
@@ -6,12 +6,28 @@
 
 `Prometheus` 存储所有数据作为时间序列.
 
-#### Metric names and labels
+#### 1.1.1 Metric names and labels
 
 每个时间序列都由其`Metric names`和可选的键值称为`label`作为唯一识别。
 
 - `Metric names` 满足 `[a-zA-Z_:][a-zA-Z0-9_:]*`(**NOTE**: `:`保留用于用户定义的记录规则. )
 - `label`满足`[a-zA-Z0-9_]*`, 以`__`开头的标签名为内部使用
+
+### 1.1.2 Samples
+
+来自实际时间序列数据的示例。每个样本包括：
+
+- 一个float64的值
+
+- 一个毫秒的精确时间戳
+
+### 1.1.3 Notation
+
+给定`Metric names`和一组`label`，经常使用此识别时间序列：
+
+```
+<metric name>{<label name>=<label value>, ...}
+```
 
 ### 1.2 Metric types
 
@@ -19,7 +35,7 @@
 
 #### 1.2.1 Counter
 
-`Counter`是一个累积度量标准，代表单个单调增加的计数器，其值只能在重新启动时增加或重置为零。例如，您可以使用计数器来表示已服务的请求数量，完成任务或错误
+`Counter`是一个累积度量标准，代表单个单调增加的计数器，其值只能增加或在重新启动时重置为零。例如，您可以使用计数器来表示已服务的请求数量，完成任务或错误.
 
 #### 1.2.2 Gauge
 
