@@ -60,7 +60,7 @@ const config = {
         title: 'thinkgos',
         logo: {
           alt: 'thinkgos Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo.jpeg',
         },
         items: [
           {
@@ -103,6 +103,11 @@ const config = {
                 to: "docs/pickup",
               },
             ]
+          },
+          {
+            position: 'left',
+            label: 'Rust',
+            to: "docs/rust",
           },
           {
             to: '/blog',
