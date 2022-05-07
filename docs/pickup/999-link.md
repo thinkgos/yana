@@ -6,17 +6,13 @@
 - [TCP 半连接队列和全连接队列满了如何应对](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651439830&idx=4&sn=1656ea642a03fba188308ab7b124ff1a&chksm=80bb1c24b7cc953260cc2bea029ca60d802303b436306427f8172efbb1b729c2f2c9904bd6b6&mpshare=1&scene=1&srcid=0115NoThktmIdt5Dcv3YTKnW&sharer_sharetime=1610698649909&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AbBcToo0EQdMH9r0VpHjIvI%3D&pass_ticket=vv4RPcR8dxxyU9301O0W%2FRibxJcJxhfVMIYs2XVP8GtDsx4DABTV1WTp%2BZI6w3AJ&wx_header=0#rd)  
 - [TCP的内存开销](https://mp.weixin.qq.com/s?__biz=MzU3NzEwNjI5OA==&mid=2247484654&idx=1&sn=7fb25c0c2c980baf9e4efc7f56c538d9&chksm=fd08fcfbca7f75edbc73f854771b66836456239fac0e5fc7a713878f92cc1db5881a28711f5d&mpshare=1&scene=1&srcid=0114tnzpzqgZ5QQ6FfrFbz2u&sharer_sharetime=1610698664483&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AePM%2BMwRumfmIJ7eQPQZUZY%3D&pass_ticket=vv4RPcR8dxxyU9301O0W%2FRibxJcJxhfVMIYs2XVP8GtDsx4DABTV1WTp%2BZI6w3AJ&wx_header=0#rd)
 
-## 2. monitor
-
-- - [ ] [Prometheus + Granafa 构建高大上的MySQL监控平台](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651439183&idx=3&sn=cc3a4c3ba4f5df2b8782b5c79371b62c&chksm=80bb1ebdb7cc97abc4f6df7b559c10705cb3ef19aadc6fdaed80c4b929aee5c3ea1d9fcd4787&mpshare=1&scene=24&srcid=&sharer_sharetime=1592738783930&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AbKOFMhI%2FvMt4BG46dI0wzQ%3D&pass_ticket=DDvVwMc9uE8gubEQ4Udh%2F7K9IzRY%2FCbcirMDYkaFdBlrl2%2B2VHn%2BmCXuaTNKOfGb#rd)
-
-## 3. micro services
+## 2. micro services
 
 - - [ ] [图文并茂讲解分布式事务的实现原理](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437896&idx=5&sn=5b8ec41097be22f0cb399be110fe736e&chksm=80bb65bab7ccecac89d52d2ae92905a9d8b885ef8fa698639e2373d49448d183ac2c25e1eb22&scene=0&xtrack=1&exportkey=AeCEwqhXz49767GtgC85Fqc%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 - - [ ] [Go微服务全链路跟踪详解](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437478&idx=1&sn=2187aacae7d92024d9abb4fb93828688&chksm=80bb6754b7ccee42ea53ffbda70406bdc3f829029c6235112bd5fd006cabbff836f436d11e58&scene=0&xtrack=1&exportkey=Aap2eWS0jqrpoKE4AVQ6l94%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 - - [ ] [微服务架构原理分析](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651437770&idx=2&sn=ba2a02df8bb89c02c6e620df349731a3&chksm=80bb6438b7cced2e7dbe9ab39c6b027326cefdd576e9108113228f097184dceabbc3061611f2&scene=0&xtrack=1&exportkey=AWNQJk%2FbQMuYeE0W7IA5cYc%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 
-## algorithm
+## 3. algorithm
 
 - - [x] [LRC缓存介绍与用法](https://mp.weixin.qq.com/s?__biz=Mzg5NTEwNTE1Mw==&mid=2247483996&idx=1&sn=5f22f8855690f0a1b9adc3402471c616&chksm=c01423b2f763aaa45c1bc71c7e86e1e05c7d27b230cf0de9fc6330bd44b68ecea0b8255a0034&scene=0&xtrack=1&exportkey=AWz484PUyWSEhkr5XWnRVWE%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
 - - [ ] [八种排序算法的思想](https://mp.weixin.qq.com/s?__biz=MzUyNDkzNzczNQ==&mid=2247487327&idx=1&sn=7172219769b69356c78f6b956760cb86&chksm=fa24f037cd5379218f1002567d8c2f6d64a3bd6b3d21ce6dd3ee7e38b89b2bb026e3adb86bd0&scene=0&xtrack=1&exportkey=ASEmKy0i163FV8waw8OKlbA%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)
