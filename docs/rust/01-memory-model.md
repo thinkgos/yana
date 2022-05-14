@@ -504,3 +504,5 @@ stack
 
 闭包相当于一个捕获变量的结构体，实现了 `FnOnce` 或 `FnMut` 或 `Fn`。
 
+## 17. Reference
+ - [Rust数据内存布局](https://rustmagazine.github.io/rust_magazine_2021/chapter_6/ant-rust-data-layout.html)
