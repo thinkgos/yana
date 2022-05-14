@@ -34,7 +34,7 @@ The IEEE 754-2008 "binary32" and "binary64" floating-point types are `f32` and `
 | `f32` | 4           | 4            |
 | `f64` | 8           | 8            |
 
-## 3. usized & isized
+## 3. `usized` & `isized`
 
 | Type    | size(bytes)/ 32位系统 | size(bytes)/ 64位系统 |
 | ------- | --------------------- | --------------------- |
@@ -51,7 +51,7 @@ The IEEE 754-2008 "binary32" and "binary64" floating-point types are `f32` and `
 
 str 与 [u8] 一样表示一个 u8 的 slice。Rust 中标准库中对 str 有个假设：符合 UTF-8 编码。内存布局与 [u8] 相同。
 
-## 5. & 和&[T] 引用
+## 5. `&` 和`&[T]` 引用
 
 ### 5.1 `&` 
 
@@ -109,7 +109,7 @@ heap          │					│
 
 
 
-## 6. &str , str 和 String 的区别
+## 6. `&str`,`str` 和 `String` 的区别
 
 ### 6.1 `String`
 
@@ -321,7 +321,7 @@ heap             			   V
             				   +–––––––––––+––––––––––––+–––––––––––+           
 ```
 
-### 9.4 Option<T>
+### 9.4 `Option<T>`
 
 ```rust
 Option<Box<i32>>
@@ -366,7 +366,7 @@ heap           V
 
 
 
-## 10. array,[T]和Vec<T>
+## 10. `array`,`[T]`和`Vec<T>`
 
 ### 10.1 `array`
 
@@ -381,7 +381,7 @@ stack       [––––  a   ––––|
 
 ### 10.2 `[T]`
 
-[T]即`slice` 是`DST` 类型，是类型 T 序列的一种视图。所以它只能使用`&[T]`宽指针进行引用,参考[&[T] 引用](# 5. & 和&[T] 引用)
+`[T]`即`slice` 是`DST` 类型，是类型 T 序列的一种视图。所以它只能使用`&[T]`宽指针进行引用,参考[&[T] 引用](# 5. & 和&[T] 引用)
 
 ### 10.3 `Vec<T>`
 
@@ -399,9 +399,108 @@ heap          │
             +––––+––––+––––+
 ```
 
+## 11. 智能指针
 
+### 11.1 `Box<T>`
 
+ `Box<T>`单所有权,只适用于单线程
 
+```rust
+let v: Box<Vec<i32>> = Box::new(vec![55,66,77]);
 
+stack    
+	  	    [ v |  
+            +–––+   
+            │ * │      
+            +–│–+    
+              |
+heap          |
+            +–V–+–––+–––+
+            │ * │ 3 │ 3 │
+            +–│–+–––+–––+
+           	  │
+              │
+            +–V––+––––+––––+
+            │ 55 │ 66 │ 77 | 
+            +––––+––––+––––+
+```
 
+### 11.2 `Rc<T>`
+
+`Rc<T>` 多所有权,只适用于单线程,且只可用于不可变借用.
+
+```rust
+let v: Rc<Vec<i32>> = Rc::new(vec![55,66,77]);
+let v2 = v.clone()
+
+stack    
+	  	    [ v |       [ v2 |
+            +–––+       +–––+
+            │ * │       │ * │ 
+            +–│–+       +–│–+
+              |___________|
+heap		  |
+            +–V–+–––+–––+–––+
+            │ 2 │ * │ 3 │ 3 |
+            +–––+–│–+–––+–––+
+              /	  │
+ ref count<– /    │
+                +–V––+––––+––––+
+                │ 55 │ 66 │ 77 | 
+                +––––+––––+––––+
+                
+```
+
+### 11.3 `Arc<T>`
+
+`Arc<T>` 数据模型同`Rc<T>`但可使用于多线程, 多所有权,只可用于不可变借用.
+
+`Arc<T>` 与`Rc<T>`区别在于,引用计数是原子计数
+
+## 12. trait object
+
+官方定义：
+
+```
+A trait object is an opaque value of another type that implements a set of traits. 
+The set of traits is made up of an object safe base trait plus any number of auto traits.  
+```
+
+trait 是 `DST` 类型 ,对trait的引用称之为 trait object, trait object是个胖指针, 包含两个普通指针分别为 `data `和 `vtable`.
+
+![2](http://imgur.thinkgos.cn/imgur/202205141636711.jpeg)
+
+## 13. Dynamically Sized Types(DST) 动态类型
+
+一般来说大多数类型，可以在编译阶段确定大小和对齐属性，[Sized trait](https://doc.rust-lang.org/stable/reference/special-types-and-traits.html#sized) 就是保证了这种特性。
+
+非 size (`?Sized`）及 `DST` 类型。
+
+- DST 类型有 slice 和 trait object.
+- DST 类型必须通过指针来使用,需要注意：
+- DST 可以作为泛型参数，但是需要注意泛型参数默认是 `Sized`，如果是 DST 类型需要特别的指定为 `?Sized`.
+
+## 14. 空类型 (Empty Types)
+
+```rust
+enum Void {}
+```
+
+空类型的一个主要应用场景是在类型层面声明不可到达性。假如，一个 API 一般需要返回一个 Result，但是在特殊情况下它是绝对不会运行失败的。这种情况下将返回值设为 Result<T, Void>，API 的调用者就可以信心十足地使用 unwrap，因为不可能产生一个 Void 类型的值，所以返回值不可能是一个 Err。
+
+## 15. function
+
+```rust
+stack    
+	  	    [ f |  
+            +–––+   
+            │ * │      
+            +–│–+    
+              |
+	 machine code of function
+```
+
+## 16. closure
+
+闭包相当于一个捕获变量的结构体，实现了 `FnOnce` 或 `FnMut` 或 `Fn`。
 
