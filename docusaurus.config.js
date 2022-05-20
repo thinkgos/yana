@@ -110,6 +110,16 @@ const config = {
             to: "docs/rust",
           },
           {
+            position: 'left',
+            label: 'Golang',
+            to: "docs/golang",
+          },
+          {
+            position: 'left',
+            label: 'Minority',
+            to: "docs/minority",
+          },
+          {
             to: '/blog',
             label: 'Blog',
             position: 'left',
