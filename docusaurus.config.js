@@ -86,6 +86,10 @@ const config = {
               {
                 label: 'mysql',
                 to: "docs/mysql",
+              },
+              {
+                label: 'redis',
+                to: "docs/redis",
               }
             ]
           },
