@@ -204,7 +204,7 @@
 
 ### 15. goroutine的泄露如何排查？pprof了解吗，说一下.
 
-> [pprof](pprof.md)
+> [pprof](./02-pprof.md)
 
 ### 16. 项目中遇到OOM情况?
 
