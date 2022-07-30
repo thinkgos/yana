@@ -91,7 +91,7 @@ Redis 专门为自动内存碎片清理功机制设置的参数了。我们可�
 
 ## 五. Redis 缓冲区
 
-
+[客户端输入输出缓冲区设置](https://time.geekbang.org/column/article/291277)
 
 
 
