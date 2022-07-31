@@ -33,7 +33,7 @@ type User struct {
     // many more fields…
 }
 
-// 临时忽略掉Password字段，并且添加token字段
+// 临时忽略掉Password字段, 并且添加token字段
 json.Marshal(struct {
     *User
     Token    string `json:"token"`
@@ -115,7 +115,7 @@ type TestObject struct {
 
 ## 7. 容忍字符串和数字互转
 
-如果你使用的是jsoniter，可以启动模糊模式来支持 PHP 传递过来的 JSON。
+如果你使用的是jsoniter, 可以启动模糊模式来支持 PHP 传递过来的 JSON。
 
 ```go
 import "github.com/json-iterator/go/extra"
@@ -139,9 +139,9 @@ jsoniter.UnmarshalFromString(`"1.23"`, &val)
 
 ## 8. 容忍空数组作为对象
 
-PHP另外一个令人崩溃的地方是，如果 PHP array是空的时候，序列化出来是[]。但是不为空的时候，序列化出来的是`{"key":"value"}`。 我们需要把 [] 当成 {} 处理。
+PHP另外一个令人崩溃的地方是, 如果 PHP array是空的时候, 序列化出来是[]。但是不为空的时候, 序列化出来的是`{"key":"value"}`。 我们需要把 [] 当成 {} 处理。
 
-如果你使用的是jsoniter，可以启动模糊模式来支持 PHP 传递过来的 JSON。
+如果你使用的是jsoniter, 可以启动模糊模式来支持 PHP 传递过来的 JSON。
 
 ```go
 import "github.com/json-iterator/go/extra"
@@ -158,7 +158,7 @@ jsoniter.UnmarshalFromString(`[]`, &val)
 
 ## 9. 使用 MarshalJSON支持time.Time
 
-golang 默认会把 time.Time 用字符串方式序列化。如果我们想用其他方式表示 time.Time，需要自定义类型并定义 MarshalJSON。
+golang 默认会把 time.Time 用字符串方式序列化。如果我们想用其他方式表示 time.Time, 需要自定义类型并定义 MarshalJSON。
 
 ```go
 type timeImplementedMarshaler time.Time
@@ -195,11 +195,11 @@ output, err := jsoniter.Marshal(time.Unix(1, 1002))
 should.Equal("1000001", string(output))
 ```
 
-如果要自定义的话，参见 RegisterTimeAsInt64Codec 的实现代码
+如果要自定义的话, 参见 RegisterTimeAsInt64Codec 的实现代码
 
 ## 11. 使用 MarshalText支持非字符串作为key的map
 
-虽然 JSON 标准里只支持 string 作为 key 的 map。但是 golang 通过 MarshalText() 接口，使得其他类型也可以作为 map 的 key。例如
+虽然 JSON 标准里只支持 string 作为 key 的 map。但是 golang 通过 MarshalText() 接口, 使得其他类型也可以作为 map 的 key。例如
 
 ```go
 f, _, _ := big.ParseFloat("1", 10, 64, big.ToZero)
@@ -212,7 +212,7 @@ should.Equal(`{"1":"2"}`, str)
 
 ## 12. 使用 json.RawMessage
 
-如果部分json文档没有标准格式，我们可以把原始的文本信息用string保存下来。
+如果部分json文档没有标准格式, 我们可以把原始的文本信息用string保存下来。
 
 ```go
 type TestObject struct {
@@ -226,7 +226,7 @@ should.Equal(` [1,2,3]`, string(data.Field2))
 
 ## 13. 使用 json.Number
 
-默认情况下，如果是 interface{} 对应数字的情况会是 float64 类型的。如果输入的数字比较大，这个表示会有损精度。所以可以 UseNumber() 启用 json.Number 来用字符串表示数字。
+默认情况下, 如果是 interface{} 对应数字的情况会是 float64 类型的。如果输入的数字比较大, 这个表示会有损精度。所以可以 UseNumber() 启用 json.Number 来用字符串表示数字。
 
 ```go
 decoder1 := json.NewDecoder(bytes.NewBufferString(`123`))
@@ -236,7 +236,7 @@ decoder1.Decode(&obj1)
 should.Equal(json.Number("123"), obj1)
 ```
 
-jsoniter 支持标准库的这个用法。同时，扩展了行为使得 Unmarshal 也可以支持 UseNumber 了。
+jsoniter 支持标准库的这个用法。同时, 扩展了行为使得 Unmarshal 也可以支持 UseNumber 了。
 
 ```go
 json := Config{UseNumber:true}.Froze()
@@ -260,7 +260,7 @@ output, err := jsoniter.Marshal(struct {
 should.Equal(`{"user_name":"taowen","first_language":"Chinese"}`, string(output))
 ```
 
-但是一个个字段来设置，太麻烦了。如果使用 jsoniter，我们可以统一设置命名风格。
+但是一个个字段来设置, 太麻烦了。如果使用 jsoniter, 我们可以统一设置命名风格。
 
 ```go
 import "github.com/json-iterator/go/extra"

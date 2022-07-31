@@ -67,7 +67,7 @@
 
 ### 日志流选择器(Log stream selector)
 
-流选择器确定要在查询结果中包含哪些日志流。日志流是日志内容的唯一来源，例如文件.
+流选择器确定要在查询结果中包含哪些日志流。日志流是日志内容的唯一来源, 例如文件.
 
 日志流选择器由一个或多个**逗号**分隔的键值对指定, 大括号(`{` and `}`)分隔流选择器。
 
@@ -80,7 +80,7 @@
 
 ### 日志管道(Log pipeline)
 
-日志管道可以附加到日志流选择器以进一步处理和过滤日志流。它是由一组表达式组成的。对于每个日志行，每个表达式按从左到右的顺序执行。如果表达式过滤掉一条日志行，则管道将停止处理当前日志行，并开始处理下一条日志行。
+日志管道可以附加到日志流选择器以进一步处理和过滤日志流。它是由一组表达式组成的。对于每个日志行, 每个表达式按从左到右的顺序执行。如果表达式过滤掉一条日志行, 则管道将停止处理当前日志行, 并开始处理下一条日志行。
 
 日志管道表达式可分为三类:
 
@@ -114,7 +114,7 @@
 
 > The string type is the only one that can filter out a log line with a label `__error__`.
 
-使用 **Duration**，**Number** 和 **Bytes** 将在比较之前转换标签值，并支持以下比较器:
+使用 **Duration**, **Number** 和 **Bytes** 将在比较之前转换标签值, 并支持以下比较器:
 
 - `==` or `=` for equality.
 - `!=` for inequality.
@@ -123,7 +123,7 @@
 
 #### 解析器
 
-解析器表达式可以从日志内容中解析和提取标签。然后可以使用提取的标签来使用标签筛选器表达式进，或者用于度量聚合。
+解析器表达式可以从日志内容中解析和提取标签。然后可以使用提取的标签来使用标签筛选器表达式进, 或者用于度量聚合。
 
 Loki 支持 [JSON](https://grafana.com/docs/loki/latest/logql/log_queries/#json), [logfmt](https://grafana.com/docs/loki/latest/logql/log_queries/#logfmt), [pattern](https://grafana.com/docs/loki/latest/logql/log_queries/#pattern), [regexp](https://grafana.com/docs/loki/latest/logql/log_queries/#regular-expression) and [unpack](https://grafana.com/docs/loki/latest/logql/log_queries/#unpack) parsers.
 
@@ -133,21 +133,21 @@ JSON解析器支持两种模式
 
 1. 无参数
 
-如果日志行是有效的 json 文档，那么向管道添加` | json `将提取所有 json 属性作为标签
+如果日志行是有效的 json 文档, 那么向管道添加` | json `将提取所有 json 属性作为标签
 
 > NOTE: 数组将被忽略
 
 2. 有参数
 
-如果日志行是有效的 json 文档，那么向管道添加` | json label="expression1", another="expression2" `将提取指 json 属性作为标签.
+如果日志行是有效的 json 文档, 那么向管道添加` | json label="expression1", another="expression2" `将提取指 json 属性作为标签.
 
 ##### logfmt
 
-可以使用`| logfmt` 添加 logfmt 解析器，并从 logfmt 格式化的日志行中提取所有键和值。
+可以使用`| logfmt` 添加 logfmt 解析器, 并从 logfmt 格式化的日志行中提取所有键和值。
 
 ##### Pattern
 
-模式分析器通过定义模式表达式(`| pattern”< pattern-expression >”`) ，允许从日志行显式提取字段。表达式匹配日志行的结构。
+模式分析器通过定义模式表达式(`| pattern”< pattern-expression >”`) , 允许从日志行显式提取字段。表达式匹配日志行的结构。
 
 > 考虑该NGINX的日志行
 >
@@ -174,27 +174,27 @@ JSON解析器支持两种模式
 
 ##### Regular expression
 
-与 logfmt 和 json (隐式地提取所有值并且不带参数)不同，regexp 解析器采用单个参数 `| regexp“ < re >”`
+与 logfmt 和 json (隐式地提取所有值并且不带参数)不同, regexp 解析器采用单个参数 `| regexp“ < re >”`
 
 ##### unpack
 
-解析器解析 JSON 日志行，解压打包阶段中的所有嵌入标签。还将使用一个特殊属性 **`_entry`**来替换原始日志行。
+解析器解析 JSON 日志行, 解压打包阶段中的所有嵌入标签。还将使用一个特殊属性 **`_entry`**来替换原始日志行。
 
 #### 行格式表达式(Line format expression)
 
-行格式表达式可以使用 [text/template](https://golang.org/pkg/text/template/)格式重写日志行内容, 它只接受一个字符串参数`| line_format "{{.label_name}}"`,所有标签都是注入到模板中的变量，可以使用{{ . label _ name }}符号。
+行格式表达式可以使用 [text/template](https://golang.org/pkg/text/template/)格式重写日志行内容, 它只接受一个字符串参数`| line_format "{{.label_name}}"`,所有标签都是注入到模板中的变量, 可以使用{{ . label _ name }}符号。
 
 #### 标签格式表达式(Labels format expression)
 
-`| label _ format` 表达式可以重命名、修改或添加标签。它接受一个逗号分隔的等式操作列表作为参数，以便一次执行多个操作。
+`| label _ format` 表达式可以重命名、修改或添加标签。它接受一个逗号分隔的等式操作列表作为参数, 以便一次执行多个操作。
 
-当两端都是标签标识符(例如 dst = src)时，操作将把 src 标签重命名为 dst。
+当两端都是标签标识符(例如 dst = src)时, 操作将把 src 标签重命名为 dst。
 
-左边也可以是模板字符串(双引号或反勾号) ，例如 `dst = “{{.status}} {{.query}}”`，在这种情况下，dst 标签值被文本/模板计算的结果替换。这是与` | line _ format `表达式相同的模板引擎，这意味着标签可以作为变量使用，您可以使用相同的函数列表。
+左边也可以是模板字符串(双引号或反勾号) , 例如 `dst = “{{.status}} {{.query}}”`, 在这种情况下, dst 标签值被文本/模板计算的结果替换。这是与` | line _ format `表达式相同的模板引擎, 这意味着标签可以作为变量使用, 您可以使用相同的函数列表。
 
-在这两种情况下，如果目标标签不存在，则创建一个新的目标标签。
+在这两种情况下, 如果目标标签不存在, 则创建一个新的目标标签。
 
-重命名表单 dst = src 将在重新映射到 dst 标签后删除 src 标签。但是，模板将保留引用的标签，例如 `dst="{{.src}}"`,结果在 dst 和 src 具有相同的值
+重命名表单 dst = src 将在重新映射到 dst 标签后删除 src 标签。但是, 模板将保留引用的标签, 例如 `dst="{{.src}}"`,结果在 dst 和 src 具有相同的值
 
 ## 三. Metric queries
 

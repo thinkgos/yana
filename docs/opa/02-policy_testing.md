@@ -1,14 +1,14 @@
 # Policy Testing
 
-`OPA`为您提供一种高级声明语言（[Rego](https://www.openpolicyagent.org/docs/latest/policy-language)），以编写系统中的重要需求的细粒度策略。
+`OPA`为您提供一种高级声明语言（[Rego](https://www.openpolicyagent.org/docs/latest/policy-language)）, 以编写系统中的重要需求的细粒度策略。
 
-为了帮助您验证您的策略的正确性，`OPA`还为您提供了一个框架，您可以用来编写策略测试。通过编写策略的测试，您可以加快新规则的开发过程，但需要优化时可减少修改规则所需的时间
+为了帮助您验证您的策略的正确性, `OPA`还为您提供了一个框架, 您可以用来编写策略测试。通过编写策略的测试, 您可以加快新规则的开发过程, 但需要优化时可减少修改规则所需的时间
 
 - [example](https://github.com/thinkgos/open-policy-agent-rego-example)
 
 ## Getting Started
 
-让我们使用一个例子来开始。下面的文件实现了一个简单的策略，允许创建新用户和用户访问自己的简介。
+让我们使用一个例子来开始。下面的文件实现了一个简单的策略, 允许创建新用户和用户访问自己的简介。
 
 ```
 package authz
@@ -26,7 +26,7 @@ allow {
 }
 ```
 
-要测试此策略，我们将创建一个包含测试用例的单独的`rego`文件。
+要测试此策略, 我们将创建一个包含测试用例的单独的`rego`文件。
 
 ```
 package authz
@@ -55,7 +55,7 @@ $ ls
 example.rego      example_test.rego
 ```
 
-要运行测试策略，请在包含文件的目录中运行`OPA`测试命令。
+要运行测试策略, 请在包含文件的目录中运行`OPA`测试命令。
 
 ```shell
 $ opa test . -v
@@ -95,7 +95,7 @@ FAIL: 1/4
 
 ## Test Format
 
-测试表达式也是标准的`Rego`规则，使用规则名称以`test_`为前缀。
+测试表达式也是标准的`Rego`规则, 使用规则名称以`test_`为前缀。
 
 ```
 package mypackage
@@ -107,7 +107,7 @@ test_some_descriptive_name {
 
 ## Test Discovery
 
-`opa test`子命令运行在命令行传递的`Rego`文件中所有找到的测试用例（即，以`test_`为前缀的规则）。如果目录作为命令行的参数，则`opa test`将递归加载其文件内容。
+`opa test`子命令运行在命令行传递的`Rego`文件中所有找到的测试用例（即, 以`test_`为前缀的规则）。如果目录作为命令行的参数, 则`opa test`将递归加载其文件内容。
 
 ## Specifying Tests to Run
 
@@ -115,13 +115,13 @@ test_some_descriptive_name {
 
 ## Test Results
 
-如果测试规则结果为`undefined`或非`true`，则会报告测试结果作为`FAIL`.
+如果测试规则结果为`undefined`或非`true`, 则会报告测试结果作为`FAIL`.
 
-如果测试遇到运行时错误（例如，除以零），则测试结果标记为`ERROR`。
+如果测试遇到运行时错误（例如, 除以零）, 则测试结果标记为`ERROR`。
 
 如果测试用例以`todo_`为前缀则`SKIPPED`。
 
-否则，测试结果标记为`PASS`
+否则, 测试结果标记为`PASS`
 
 ```
 package example
@@ -147,7 +147,7 @@ todo_test_missing_implementation {
 }
 ```
 
-默认情况下，`opa test`报告所有测试执行的测试数量并显示失败或错误。
+默认情况下, `opa test`报告所有测试执行的测试数量并显示失败或错误。
 
 ```shell
 $  opa test example.rego pass_fail_error_test.rego 
@@ -160,7 +160,7 @@ FAIL: 1/3
 ERROR: 1/3
 ```
 
-默认情况下，`OPA`以人类可读格式打印测试结果。如果您需要以编程方式使用测试结果，请使用`JSON`输出格式。
+默认情况下, `OPA`以人类可读格式打印测试结果。如果您需要以编程方式使用测试结果, 请使用`JSON`输出格式。
 
 ```shell
 $ opa test --format=json example.rego pass_fail_error_test.rego 
@@ -244,7 +244,7 @@ test_allow_with_data {
 }
 ```
 
-运行策略测试，请运行`opa test`命令
+运行策略测试, 请运行`opa test`命令
 
 ```shell
 $ opa test -v authz.rego authz_test.rego
@@ -288,7 +288,7 @@ data.authz.test_replace_rule: PASS (328ns)
 PASS: 1/1
 ```
 
-函数不能使用`with`关键字替换。例如，在下面的策略中，`cannot_replace`函数无法被替换。
+函数不能使用`with`关键字替换。例如, 在下面的策略中, `cannot_replace`函数无法被替换。
 
 **authz_function_cannot_repleace.rego**
 
@@ -316,12 +316,12 @@ $ opa test -v authz_function_cannot_repleace.rego authz_function_cannot_repleace
 
 除了报告测试通过,失败和错误结果, `opa test`还可以报告被测策略的覆盖.
 
-覆盖报告包括评估的所有行，并在命令行上提供的`rego`文件中进行评估。当没有覆盖那一行时，它表示两件事之一：
+覆盖报告包括评估的所有行, 并在命令行上提供的`rego`文件中进行评估。当没有覆盖那一行时, 它表示两件事之一：
 
-- 如果这行指的是规则的头部，则规则体永远不会是真的。
-- 如果这行指的是规则中的表达式，则不评估表达式。
+- 如果这行指的是规则的头部, 则规则体永远不会是真的。
+- 如果这行指的是规则中的表达式, 则不评估表达式。
 
-如果我们在原始`example.rego`文件上运行覆盖报告，`examply_test.rego`没`test_get_user_allowed`这条规则时进行运行，报告将指示未涵盖第8行。
+如果我们在原始`example.rego`文件上运行覆盖报告, `examply_test.rego`没`test_get_user_allowed`这条规则时进行运行, 报告将指示未涵盖第8行。
 
 ```shell
 $ opa test --coverage --format=json example.rego example_test.rego

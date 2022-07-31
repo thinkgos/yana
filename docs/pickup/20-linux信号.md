@@ -12,7 +12,7 @@
 | SIGFPE    | 8        | Core | 算术运行错误(浮点运算错误、除数为零等)                       |
 | `SIGKILL` | 9        | Term | 无条件结束程序(不能被捕获、阻塞或忽略)                       |
 | SIGSEGV   | 11       | Core | 无效内存引用(试图访问不属于自己的内存空间、对只读内存空间进行写操作) |
-| SIGPIPE   | 13       | Term | 消息管道损坏(FIFO/Socket通信时，管道未打开而进行写操作)      |
+| SIGPIPE   | 13       | Term | 消息管道损坏(FIFO/Socket通信时, 管道未打开而进行写操作)      |
 | SIGALRM   | 14       | Term | 时钟定时信号                                                 |
 | `SIGTERM` | 15       | Term | 结束程序(可以被捕获、阻塞或忽略)                             |
 | `SIGUSR1` | 30,10,16 | Term | 用户保留                                                     |

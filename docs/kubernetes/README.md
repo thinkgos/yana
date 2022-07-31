@@ -73,7 +73,7 @@ kubectl [create|delete|apply] -f path/to/xxx.[yaml|json] --record
 
 ##  3 Headless Service
 
-它所代理的所有 Pod 的 IP 地址，都会被绑定一个这样格式的 DNS 记录.
+它所代理的所有 Pod 的 IP 地址, 都会被绑定一个这样格式的 DNS 记录.
 
-`<pod-name>.<svc-name>.<namespace>.svc.cluster.local`这个DNS记录，正是 Kubernetes 项目为 Pod 分配的唯一的“可解析身份”（Resolvable Identity）。
+`<pod-name>.<svc-name>.<namespace>.svc.cluster.local`这个DNS记录, 正是 Kubernetes 项目为 Pod 分配的唯一的“可解析身份”（Resolvable Identity）。
 

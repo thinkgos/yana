@@ -14,7 +14,7 @@ h2 { color:silver; }
 
 ## 二. 选择器分组
 
-可以对选择器进行分组(`以','分隔`)，这样，被分组的选择器就可以分享相同的声明。
+可以对选择器进行分组(`以','分隔`), 这样, 被分组的选择器就可以分享相同的声明。
 
 ```css
 h1,h2,h3,h4,h5,h6 {
@@ -54,13 +54,13 @@ ID 选择器允许以一种独立于文档元素的方式来指定样式
 
 ### 1. 简单属性选择
 
-如果您希望把包含标题（title）的所有元素变为红色，可以写作: 
+如果您希望把包含标题（title）的所有元素变为红色, 可以写作: 
 
 ```css
 *[title] {color:red;}  // 把包含标题（title）的所有元素变为红色
 a[href] {color:red;} // 只对有 href 属性的锚（a 元素）应用样式
 a[href][title] {color:red;} // 将同时有 href 和 title 属性的 HTML 超链接的文本设置为红色
-img[alt] {border: 5px solid red;} // 所有带有 alt 属性的图像应用样式，从而突出显示这些有效的图像
+img[alt] {border: 5px solid red;} // 所有带有 alt 属性的图像应用样式, 从而突出显示这些有效的图像
 ```
 
 ### 2. 根据具体属性值选择
@@ -75,7 +75,7 @@ p[class="important warning"] {color: red;} // 根据具体属性值来选择该�
 | [[*attribute*\]](https://www.w3school.com.cn/cssref/selector_attribute.asp) | 选取带有attribute属性的元素。                                |
 | [[*attribute*=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value.asp) | 选取attribute属性值为value的元素。                           |
 | [[*attribute*~=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value_contain.asp) | 选取attribute属性值中包含value的元素。                       |
-| [[*attribute*\|=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value_start.asp) | 选取attribute属性值等于value或value-开头的元素，该值必须是整个单词。 |
+| [[*attribute*\|=*value*\]](https://www.w3school.com.cn/cssref/selector_attribute_value_start.asp) | 选取attribute属性值等于value或value-开头的元素, 该值必须是整个单词。 |
 | [[*attribute*^=*value*\]](https://www.w3school.com.cn/cssref/selector_attr_begin.asp) | 选取attribute属性值value开头的每个元素。                     |
 | [[*attribute*$=value]](https://www.w3school.com.cn/cssref/selector_attr_end.asp) | 选取attribute属性值value结尾的每个元素。                     |
 | [[attribute*=value]](https://www.w3school.com.cn/cssref/selector_attr_contain.asp) | 选取attribute属性值包含value的每个元素。                     |
@@ -90,7 +90,7 @@ h1 em {color:red;}
 
 ## 七. 子元素选择器
 
-与后代选择器相比，子元素选择器（Child selectors）只能选择作为某元素子元素的元素。
+与后代选择器相比, 子元素选择器（Child selectors）只能选择作为某元素子元素的元素。
 
 ```css
 h1 > strong {color:red;}
@@ -98,7 +98,7 @@ h1 > strong {color:red;}
 
 ## 八. 相邻兄弟选择器
 
-相邻兄弟选择器（Adjacent sibling selector）可选择紧接在另一元素后的元素，且二者有相同父元素。
+相邻兄弟选择器（Adjacent sibling selector）可选择紧接在另一元素后的元素, 且二者有相同父元素。
 
 ```css
 h1 + p {margin-top:50px;}
@@ -144,7 +144,7 @@ q:lang(no)   {
 | :----------------------------------------------------------- | :--------------------------------------- | :--- |
 | [:active](https://www.w3school.com.cn/cssref/pr_pseudo_active.asp) | 向被激活的元素添加样式。                 | 1    |
 | [:focus](https://www.w3school.com.cn/cssref/pr_pseudo_focus.asp) | 向拥有键盘输入焦点的元素添加样式。       | 2    |
-| [:hover](https://www.w3school.com.cn/cssref/pr_pseudo_hover.asp) | 当鼠标悬浮在元素上方时，向元素添加样式。 | 1    |
+| [:hover](https://www.w3school.com.cn/cssref/pr_pseudo_hover.asp) | 当鼠标悬浮在元素上方时, 向元素添加样式。 | 1    |
 | [:link](https://www.w3school.com.cn/cssref/pr_pseudo_link.asp) | 向未被访问的链接添加样式。               | 1    |
 | [:visited](https://www.w3school.com.cn/cssref/pr_pseudo_visited.asp) | 向已被访问的链接添加样式。               | 1    |
 | [:first-child](https://www.w3school.com.cn/cssref/pr_pseudo_first-child.asp) | 向元素的第一个子元素添加样式。           | 2    |

@@ -1,6 +1,6 @@
 # 内存模型
 
-类型的布局是其大小（size）、对齐方式（align）及其字段的相对偏移量。对于枚举，如何布局和解释判别式也是类型布局的一部分。 对于 Sized 的数据类型，可以在编译时知道内存布局，可以通过 [size_of](https://doc.rust-lang.org/stable/std/mem/fn.size_of.html) 和 [align_of](https://doc.rust-lang.org/stable/std/mem/fn.align_of.html) 获得其 size 和 align。
+类型的布局是其大小（size）、对齐方式（align）及其字段的相对偏移量。对于枚举, 如何布局和解释判别式也是类型布局的一部分。 对于 Sized 的数据类型, 可以在编译时知道内存布局, 可以通过 [size_of](https://doc.rust-lang.org/stable/std/mem/fn.size_of.html) 和 [align_of](https://doc.rust-lang.org/stable/std/mem/fn.align_of.html) 获得其 size 和 align。
 
 ```text
 The layout of a type is its size, alignment, and the relative offsets of its fields. 
@@ -45,7 +45,7 @@ The IEEE 754-2008 "binary32" and "binary64" floating-point types are `f32` and `
 
 ### 4.1 char 类型
 
-`char`表示：一个 32 位(4 Bytes)长度字符，Unicode 标量值 [Unicode Scalar Value](http://www.unicode.org/glossary/#unicode_scalar_value) 范围为 0x0000 - 0xD7FF 或者是 0xE000 - 0x10FFFF。
+`char`表示：一个 32 位(4 Bytes)长度字符, Unicode 标量值 [Unicode Scalar Value](http://www.unicode.org/glossary/#unicode_scalar_value) 范围为 0x0000 - 0xD7FF 或者是 0xE000 - 0x10FFFF。
 
 ### 4.2 str 类型
 
@@ -71,7 +71,7 @@ stack
 
 ### 5.2 `&[T]` slice 引用
 
- slice 的使用必须要通过指针，`&[T]` 是一个胖指针，保存指向数据的地址和元素个数。 slice 的内存布局与其指向的 array 部分相同。
+ slice 的使用必须要通过指针, `&[T]` 是一个胖指针, 保存指向数据的地址和元素个数。 slice 的内存布局与其指向的 array 部分相同。
 
 ```rust
 // array &[T]
@@ -170,7 +170,7 @@ stack
 
 ## 8. struct
 
-结构体是带命名的复合类型，rust有三种结构体类型: `struct`, `StructExprStruct`,`StructExprUnit`
+结构体是带命名的复合类型, rust有三种结构体类型: `struct`, `StructExprStruct`,`StructExprUnit`
 
 ### 8.1 `struct` 含有字段的结构体
 
@@ -381,7 +381,7 @@ stack       [––––  a   ––––|
 
 ### 10.2 `[T]`
 
-`[T]`即`slice` 是`DST` 类型，是类型 T 序列的一种视图。所以它只能使用`&[T]`宽指针进行引用,参考[&[T] 引用](# 5. & 和&[T] 引用)
+`[T]`即`slice` 是`DST` 类型, 是类型 T 序列的一种视图。所以它只能使用`&[T]`宽指针进行引用,参考[&[T] 引用](# 5. & 和&[T] 引用)
 
 ### 10.3 `Vec<T>`
 
@@ -472,13 +472,13 @@ trait 是 `DST` 类型 ,对trait的引用称之为 trait object, trait object是
 
 ## 13. Dynamically Sized Types(DST) 动态类型
 
-一般来说大多数类型，可以在编译阶段确定大小和对齐属性，[Sized trait](https://doc.rust-lang.org/stable/reference/special-types-and-traits.html#sized) 就是保证了这种特性。
+一般来说大多数类型, 可以在编译阶段确定大小和对齐属性, [Sized trait](https://doc.rust-lang.org/stable/reference/special-types-and-traits.html#sized) 就是保证了这种特性。
 
 非 size (`?Sized`）及 `DST` 类型。
 
 - DST 类型有 slice 和 trait object.
 - DST 类型必须通过指针来使用,需要注意：
-- DST 可以作为泛型参数，但是需要注意泛型参数默认是 `Sized`，如果是 DST 类型需要特别的指定为 `?Sized`.
+- DST 可以作为泛型参数, 但是需要注意泛型参数默认是 `Sized`, 如果是 DST 类型需要特别的指定为 `?Sized`.
 
 ## 14. 空类型 (Empty Types)
 
@@ -486,7 +486,7 @@ trait 是 `DST` 类型 ,对trait的引用称之为 trait object, trait object是
 enum Void {}
 ```
 
-空类型的一个主要应用场景是在类型层面声明不可到达性。假如，一个 API 一般需要返回一个 Result，但是在特殊情况下它是绝对不会运行失败的。这种情况下将返回值设为 Result<T, Void>，API 的调用者就可以信心十足地使用 unwrap，因为不可能产生一个 Void 类型的值，所以返回值不可能是一个 Err。
+空类型的一个主要应用场景是在类型层面声明不可到达性。假如, 一个 API 一般需要返回一个 Result, 但是在特殊情况下它是绝对不会运行失败的。这种情况下将返回值设为 Result<T, Void>, API 的调用者就可以信心十足地使用 unwrap, 因为不可能产生一个 Void 类型的值, 所以返回值不可能是一个 Err。
 
 ## 15. function
 
@@ -502,7 +502,7 @@ stack
 
 ## 16. closure
 
-闭包相当于一个捕获变量的结构体，实现了 `FnOnce` 或 `FnMut` 或 `Fn`。
+闭包相当于一个捕获变量的结构体, 实现了 `FnOnce` 或 `FnMut` 或 `Fn`。
 
 ## 17. Reference
  - [Rust数据内存布局](https://rustmagazine.github.io/rust_magazine_2021/chapter_6/ant-rust-data-layout.html)

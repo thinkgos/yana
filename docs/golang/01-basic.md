@@ -1,12 +1,12 @@
 # golang底层实现拾掇
 
-## 1. goroutine初始栈大小，上下文如何切换，存在哪里
+## 1. goroutine初始栈大小, 上下文如何切换, 存在哪里
 目前版本goroutine初始栈为`2Kb`.
 
 ## 2. GMP
 
 ```
-- GMP说一下，P有多少个，G有多少个，M有多少个。系统调用的时候M会如何，网络IO的时候M会怎样。
+- GMP说一下, P有多少个, G有多少个, M有多少个。系统调用的时候M会如何, 网络IO的时候M会怎样。
 - go func(){} 执行过程  
 ```
 
@@ -21,12 +21,12 @@
 
 - ***同步协作式调度***
   - **主动用户让权**：通过 `runtime.Gosched` 调用主动让出执行机会；
-  - **主动调度弃权**：(**执行栈扩张**)当发生执行栈分段时，检查自身的抢占标记，决定是否继续执行；
+  - **主动调度弃权**：(**执行栈扩张**)当发生执行栈分段时, 检查自身的抢占标记, 决定是否继续执行；
 - ***异步抢占式调度***
-  - **被动监控抢占**：当 G 阻塞在 M 上时(系统调用、channel 等)，系统监控会将 P 从 M 上抢夺并分配给其他的 M 来执行其他的 G，而位于被抢夺 P 的本地调度队列中的 G 则可能会被偷取到其他 M 执行。
-  - **被动GC抢占**：当需要进行垃圾回收时，为了保证不具备主动抢占处理的函数执行时间过长，导致垃圾回收迟迟不能执行而导致的高延迟，而强制停止 G 并转为执行垃圾回收。
+  - **被动监控抢占**：当 G 阻塞在 M 上时(系统调用、channel 等), 系统监控会将 P 从 M 上抢夺并分配给其他的 M 来执行其他的 G, 而位于被抢夺 P 的本地调度队列中的 G 则可能会被偷取到其他 M 执行。
+  - **被动GC抢占**：当需要进行垃圾回收时, 为了保证不具备主动抢占处理的函数执行时间过长, 导致垃圾回收迟迟不能执行而导致的高延迟, 而强制停止 G 并转为执行垃圾回收。
   
-### 3. Go的GC说一下，扫描从哪里发起？
+### 3. Go的GC说一下, 扫描从哪里发起？
 
 > - [GO GC的认识](https://www.bookstack.cn/read/qcrao-Go-Questions/GC-GC.md)
 > - [Go三色标记,混合写屏障GC模式图文全分析](https://studygolang.com/articles/27243?fr=sidebar)
@@ -34,22 +34,22 @@
 
 > 常见GC实现方法:
 >
-> - **追踪式 GC**: 从根对象出发，根据对象之间的引用信息，一步步推进直到扫描完毕整个堆并确定需要保留的对象，从而回收所有可回收的对象。Go、 Java、V8 对 JavaScript 的实现等均为追踪式 GC。
-> - **引用计数式 GC**: 每个对象自身包含一个被引用的计数器，当计数器归零时自动得到回收.
+> - **追踪式 GC**: 从根对象出发, 根据对象之间的引用信息, 一步步推进直到扫描完毕整个堆并确定需要保留的对象, 从而回收所有可回收的对象。Go、 Java、V8 对 JavaScript 的实现等均为追踪式 GC。
+> - **引用计数式 GC**: 每个对象自身包含一个被引用的计数器, 当计数器归零时自动得到回收.
 >
 > **GO采用无分代、不整理、并发的三色标记清扫算法.**
 
-> **根对象**在垃圾回收的术语中又叫做**根集合**，它是垃圾回收器在标记过程时最先检查的对象，包括：
+> **根对象**在垃圾回收的术语中又叫做**根集合**, 它是垃圾回收器在标记过程时最先检查的对象, 包括：
 >
 > 1. **全局变量**：程序在编译期就能确定的那些存在于程序整个生命周期的变量。
-> 2. **执行栈**：每个 goroutine 都包含自己的执行栈，这些执行栈上包含栈上的变量及指向分配的堆内存区块的指针。
-> 3. **寄存器**：寄存器的值可能表示一个指针，参与计算的这些指针可能指向某些赋值器分配的堆内存区块。
+> 2. **执行栈**：每个 goroutine 都包含自己的执行栈, 这些执行栈上包含栈上的变量及指向分配的堆内存区块的指针。
+> 3. **寄存器**：寄存器的值可能表示一个指针, 参与计算的这些指针可能指向某些赋值器分配的堆内存区块。
 
 #### a. GC触发时机
 
-> 1. **主动触发**，通过调用 `runtime.GC` 来触发 GC，此调用阻塞式地等待当前 GC 运行完毕。
-> 2. **被动触发**，分为两种方式：
->    - **被动系统监控**，当超过***两分钟***没有产生任何 GC 时，强制触发 GC。
+> 1. **主动触发**, 通过调用 `runtime.GC` 来触发 GC, 此调用阻塞式地等待当前 GC 运行完毕。
+> 2. **被动触发**, 分为两种方式：
+>    - **被动系统监控**, 当超过***两分钟***没有产生任何 GC 时, 强制触发 GC。
 >    - 采用**步调(Pacing)算法**, 其核心思想是控制内存增长的比例。
 
 ### 4. Go的内存分配说一下
@@ -64,23 +64,23 @@
 
 > 自己管理,tcmaclloc,采用追踪法GC.
 
-#### b.  Chan分配在栈上还是堆上？哪些对象分配在堆上，哪些对象分配在栈上？
+#### b.  Chan分配在栈上还是堆上？哪些对象分配在堆上, 哪些对象分配在栈上？
 
 > chan是分配在堆上的.
 >
 > 看具体情况,由编译器决定,编译器会做逃逸分析.
 >
-> 如果编译器不能确保变量在函数 return 之后不再被引用，编译器就会将变量分配到堆上
+> 如果编译器不能确保变量在函数 return 之后不再被引用, 编译器就会将变量分配到堆上
 >
 > 如果对象比较大的话,直接分在堆上.
 
-#### c. 介绍一下大对象小对象，为什么小对象多了会造成gc压力？
+#### c. 介绍一下大对象小对象, 为什么小对象多了会造成gc压力？
 
 > 通常小对象过多会导致GC三色法消耗过多的CPU
 
 ### 5. Go有哪些坑？for range为什么会有坑？
 
-### 6. CAS知道吗，在Go的哪些地方用到了？
+### 6. CAS知道吗, 在Go的哪些地方用到了？
 
 > compare and swap (比较并交换)是原子操作
 
@@ -90,13 +90,13 @@
 > - [理解 Golang 哈希表Map的原理](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651438047&idx=4&sn=d234ffa237982e362c38228fe624b11b&chksm=80bb652db7ccec3b59c9752d8513c12018fd1547c886b5d378b845a09c1840ce63caa9a129cc&scene=0&xtrack=1&exportkey=ARaBWq19Ty4X7nN7vLQgb2g%3D&pass_ticket=edom3%2BQWJv2%2F6ag8wwGj83w98nQSUN8ex7sdZB89cFp%2FbMiUGbmDvKeH%2BLBfXRK2#rd)  
 > - [深度解密之Go的sync.Map](https://www.cnblogs.com/qcrao-2018/p/12833787.html)
 
-#### 	a. Go的map是如何实现的，是并发安全的吗？
+#### 	a. Go的map是如何实现的, 是并发安全的吗？
 
 #### 	b. sync.map是如何实现的？
 
 > sync.map 适用于*读多写少*的场景。
 >
-> 对于写多的场景，会导致 read map 缓存失效，需要加锁，导致冲突变多；而且由于未命中 read map 次数过多，导致 dirty map 提升为 read map，这是一个 O(N) 的操作，会进一步降低性能。
+> 对于写多的场景, 会导致 read map 缓存失效, 需要加锁, 导致冲突变多；而且由于未命中 read map 次数过多, 导致 dirty map 提升为 read map, 这是一个 O(N) 的操作, 会进一步降低性能。
 
 ### 8. slice 和 array
 
@@ -106,7 +106,7 @@
 
 > - [深度理解Go语言之channel](https://zhuanlan.zhihu.com/p/74613114 )
 
-#### a. `chan`的优点是什么，如何实现的?
+#### a. `chan`的优点是什么, 如何实现的?
 
 #### 	b.  `chan`的使用场景？
 
@@ -129,11 +129,11 @@
 
 #### c. `chan`无缓冲和有缓冲的区别
 
-> `chan`无缓冲时，发送阻塞直到数据被接收，接收阻塞直到读取到数据
+> `chan`无缓冲时, 发送阻塞直到数据被接收, 接收阻塞直到读取到数据
 >
-> `chan`有缓冲时，当缓冲满时发送阻塞，当缓冲空时接收阻塞
+> `chan`有缓冲时, 当缓冲满时发送阻塞, 当缓冲空时接收阻塞
 
-#### d. 是否了解channel底层实现，比如实现channel的数据结构是什么？
+#### d. 是否了解channel底层实现, 比如实现channel的数据结构是什么？
 
 ### 10. interface
 
@@ -150,13 +150,13 @@
 > [深入浅出sync.Pool使用姿势篇](https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&mid=2651445612&idx=3&sn=4fa1acce4fb10fab7611280d151c1f3a&chksm=80bb079eb7cc8e88cab92133127a4e5cf5ac8e9b54cc3dc3bf84d9c3c4d956f0d38f3d7288b7&mpshare=1&scene=1&srcid=03017pB0oyJcF6oj1iBLFFfg&sharer_sharetime=1614562522328&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=Ac5IW8Ma93uqb783n2JfnF4%3D&pass_ticket=ll15823uu8mhVAL4yECcmDsxKIBjxWVnXv%2FANTvNoR%2FAiFgnkMnfxzcU2XP6YYtZ&wx_header=0#rd)  
 > [sync.Pool源码级原理剖析](https://mp.weixin.qq.com/s?__biz=Mzg3NTU3OTgxOA==&mid=2247487157&idx=1&sn=231af45701885f70e40fbf013f032192&chksm=cf3e1e70f8499766622ccf8c204e6a5ee667c70372a530e9d3d77ed4cd54be8b257d9efb65e2&mpshare=1&scene=1&srcid=0301LjqwhGJngNH3rrnpxYeO&sharer_sharetime=1614562583650&sharer_shareid=fbafc624aa53cd09857fb0861ac2a16d&exportkey=AWqCypMqymdCTksPWP5Zpu4%3D&pass_ticket=ll15823uu8mhVAL4yECcmDsxKIBjxWVnXv%2FANTvNoR%2FAiFgnkMnfxzcU2XP6YYtZ&wx_header=0#rd)
 
-### 13. Go select是怎么用的，具体如何实现的？
+### 13. Go select是怎么用的, 具体如何实现的？
 
 ### 14. 并发
 
     - gorotinue控制
-        - 如果我希望主协程通知并且等待子协程关闭，应该如何做？
-        - context了解吗，怎么用的，如何实现的？
+        - 如果我希望主协程通知并且等待子协程关闭, 应该如何做？
+        - context了解吗, 怎么用的, 如何实现的？
     - 并发原语
 
 > - [channel ](#9. channel)
@@ -171,17 +171,17 @@
 >
 > 加锁过程: 
 >
-> > - 如果互斥锁处于初始化状态，就会直接通过置位 `mutexLocked` 加锁；
-> > - 如果互斥锁处于 `mutexLocked` 并且在**普通模式**下工作，就会进入自旋，执行 30 次 `PAUSE` 指令消耗 CPU 时间等待锁的释放；
-> > - 如果当前 Goroutine 等待锁的时间超过了 `1ms`，互斥锁就会被切换到**饥饿模式**；
-> > - 互斥锁在正常情况下会通过 `runtime_SemacquireMutex` 方法将调用 `Lock` 的 Goroutine 切换至休眠状态，等待持有信号量的 Goroutine 唤醒当前协程；
-> > - 如果当前 Goroutine 是互斥锁上的最后一个等待的协程或者等待的时间小于 `1ms`，当前 Goroutine 会将互斥锁切换回**正常模式**.
+> > - 如果互斥锁处于初始化状态, 就会直接通过置位 `mutexLocked` 加锁；
+> > - 如果互斥锁处于 `mutexLocked` 并且在**普通模式**下工作, 就会进入自旋, 执行 30 次 `PAUSE` 指令消耗 CPU 时间等待锁的释放；
+> > - 如果当前 Goroutine 等待锁的时间超过了 `1ms`, 互斥锁就会被切换到**饥饿模式**；
+> > - 互斥锁在正常情况下会通过 `runtime_SemacquireMutex` 方法将调用 `Lock` 的 Goroutine 切换至休眠状态, 等待持有信号量的 Goroutine 唤醒当前协程；
+> > - 如果当前 Goroutine 是互斥锁上的最后一个等待的协程或者等待的时间小于 `1ms`, 当前 Goroutine 会将互斥锁切换回**正常模式**.
 >
 > 解锁过程:
 >
-> - 如果互斥锁已经被解锁，那么调用 `Unlock` 会直接抛出异常；
-> - 如果互斥锁处于**饥饿模式**，会直接将锁的所有权交给队列中的下一个等待者，等待者会负责设置 `mutexLocked` 标志位；
-> - 如果互斥锁处于**普通模式**，并且没有 Goroutine 等待锁的释放或者已经有被唤醒的 Goroutine 获得了锁就会直接返回，在其他情况下回通过 `runtime_Semrelease` 唤醒对应的 Goroutine
+> - 如果互斥锁已经被解锁, 那么调用 `Unlock` 会直接抛出异常；
+> - 如果互斥锁处于**饥饿模式**, 会直接将锁的所有权交给队列中的下一个等待者, 等待者会负责设置 `mutexLocked` 标志位；
+> - 如果互斥锁处于**普通模式**, 并且没有 Goroutine 等待锁的释放或者已经有被唤醒的 Goroutine 获得了锁就会直接返回, 在其他情况下回通过 `runtime_Semrelease` 唤醒对应的 Goroutine
 
 #### b. Mutex可以做自旋锁么
 
@@ -202,7 +202,7 @@
 > 3. 对于Map可以使用sync.Map
 > 4. 针对读多写少情况可以使用sync.RWMutex
 
-### 15. goroutine的泄露如何排查？pprof了解吗，说一下.
+### 15. goroutine的泄露如何排查？pprof了解吗, 说一下.
 
 > [pprof](./02-pprof.md)
 

@@ -6,10 +6,10 @@ sidebar_position: 0
 
 # Docker核心原理
 
-`Docker` 是利用 Linux 的 `Namespace` 、`Cgroups` 和`联合文件系统`三大机制来保证实现的， 所以它的原理是
+`Docker` 是利用 Linux 的 `Namespace` 、`Cgroups` 和`联合文件系统`三大机制来保证实现的,  所以它的原理是
 
-- `Namespace` 做主机名、网络、PID 等资源的隔离，
-- `Cgroups`对进程或者进程组做资源（例如：CPU、内存等）的限制，
+- `Namespace` 做主机名、网络、PID 等资源的隔离, 
+- `Cgroups`对进程或者进程组做资源（例如：CPU、内存等）的限制, 
 - `联合文件系统`用于镜像构建和容器运行环境
 
 ## 1. namespace 资源隔离
@@ -152,7 +152,7 @@ Docker daemon在宿主机上负责创建这个veth pair,把一端绑定到docker
 
 > `cgroups`是Linux内核提供的一种机制,这种机制可以根据需求把一系列系统任务及其子任务整合(或分隔)到按资源划分等 级的不同组内,从而为系统资源管理提供统一的框架.
 > cgroups可以限制,记录任务组所使用的物理资源(包括CPU,Memory,IO,网络等),为容器实现虚拟化提供了基石.
-> 在容器的实现中，`Cgroups` 通常用来限制容器的 CPU 和内存等资源的使用。
+> 在容器的实现中, `Cgroups` 通常用来限制容器的 CPU 和内存等资源的使用。
 
 cgroups特点:
 
@@ -199,4 +199,4 @@ cgroup的实现本质是给任务挂上钩子,当任务运行的过程中涉及�
 
 ## 3. UnionFS 联合文件系统
 
-Docker 使用联合文件系统为容器提供构建层，使得容器可以实现写时复制以及镜像的分层构建和存储。常用的联合文件系统有 AUFS、Overlay 和 Devicemapper 等。
+Docker 使用联合文件系统为容器提供构建层, 使得容器可以实现写时复制以及镜像的分层构建和存储。常用的联合文件系统有 AUFS、Overlay 和 Devicemapper 等。

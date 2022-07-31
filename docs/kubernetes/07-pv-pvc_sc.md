@@ -81,8 +81,8 @@ spec:
 
 StorageClass 对象会定义如下两个部分内容：
 
-- 第一，PV 的属性。比如，存储类型、Volume 的大小等等。
-- 第二，创建这种 PV 需要用到的存储插件。比如，Ceph 等等。
+- 第一, PV 的属性。比如, 存储类型、Volume 的大小等等。
+- 第二, 创建这种 PV 需要用到的存储插件。比如, Ceph 等等。
 
 ```yaml
 apiVersion: storage.k8s.io/v1
@@ -137,11 +137,11 @@ spec:
 
 
 
-- PVC 描述的，是 Pod 想要使用的持久化存储的属性，比如存储的大小、读写权限等。
-- PV 描述的，则是一个具体的 Volume 的属性，比如 Volume 的类型、挂载目录、远程存储服务器地址等。
-- 而 StorageClass 的作用，则是充当 PV 的模板。并且，只有同属于一个 StorageClass 的 PV 和 PVC，才可以绑定在一起
+- PVC 描述的, 是 Pod 想要使用的持久化存储的属性, 比如存储的大小、读写权限等。
+- PV 描述的, 则是一个具体的 Volume 的属性, 比如 Volume 的类型、挂载目录、远程存储服务器地址等。
+- 而 StorageClass 的作用, 则是充当 PV 的模板。并且, 只有同属于一个 StorageClass 的 PV 和 PVC, 才可以绑定在一起
 
-> `StorageClass` 的另一个重要作用，是指定 PV 的 Provisioner（存储插件）。这时候，如果你的存储插件支持 `Dynamic Provisioning` 的话，Kubernetes 就可以自动为你创建 PV 了。
+> `StorageClass` 的另一个重要作用, 是指定 PV 的 Provisioner（存储插件）。这时候, 如果你的存储插件支持 `Dynamic Provisioning` 的话, Kubernetes 就可以自动为你创建 PV 了。
 
 
 
