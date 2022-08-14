@@ -44,25 +44,25 @@
 ## 二. Log queries
 
 ```
-        _  optional log pipeline   _
-          /       \
-        filter operator 
-         |=    \
-         !=               |  line filter
-         |~     |  expression
-         !~    /
+                _ optional log pipeline _
+               /       					 \
+                filter operator 
+                 |=    \
+                 !=     |  line filter expression
+                 |~     |  
+                 !~    /
  
- { stream selector }             =    \
-            !=     |
-            =~      \  label filter
-            !~      /  expression
-            >   >=    |
-            <   <=   /
+ { stream selector }
+ 				=   	 \
+                !=       |
+                =~        \  label filter
+                !~        /  expression
+                >   >=    |
+                <   <=   /
             
             parser expression
             line format expressin 
             label format expression
- 
 ```
 
 ### 日志流选择器(Log stream selector)
