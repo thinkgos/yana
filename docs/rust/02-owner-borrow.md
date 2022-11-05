@@ -22,7 +22,7 @@ fn main() {
 
 ### Struct, Enum
 
-#### 成员均实现Copy trait
+#### Struct成员均实现Copy trait, 但rust并不会默认为struct实现copy
 
 ```rust
 #[derive(Debug)]
@@ -46,7 +46,7 @@ fn main() {
 }
 ```
 
-#### 显式实现Copy trait
+#### Struct需要显式实现Copy trait,使用Copy宏.
 
 ```rust
 // 显式指定struct实现copy trait
@@ -63,7 +63,7 @@ fn main() {
 }
 ```
 
-#### 成员含有未实现Copy trait
+#### Struct成员含有未实现Copy trait, 那么Copy宏显式指定将导致编译失败
 
 ```rust
 #[derive(Debug, Copy, Clone)]
