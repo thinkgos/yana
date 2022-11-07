@@ -1,4 +1,4 @@
-# 标准 `trait`
+# 标准 trait
 
 ## 1. 内存相关: `Clone`/`Copy`/`Drop`
 
@@ -179,7 +179,7 @@ pub trait AsMut<T> where T: ?Sized {
 }
 ```
 
-## 4. Deref / DerefMut
+## 4. `Deref` / `DerefMut`
 
 ```rust
 pub trait Deref {
@@ -195,7 +195,7 @@ pub trait DerefMut: Deref {
 
 ![image-20221107082655636](http://imgur.thinkgos.cn/imgur/202211070826785.png)
 
-## 5. Debug / Display / Default
+## 5. `Debug` / `Display` / `Default`
 
 ```rust
 pub trait Debug {
