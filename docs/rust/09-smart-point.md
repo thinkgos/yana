@@ -1,14 +1,14 @@
 # 智能指针
 
-**指针**是一个持有内存地址的值, 可以通过解引用来访问它指向的内存地址, 理论上可以解引用到任意数据类型；
+**指针**是一个持有内存地址的值, 可以通过解引用来访问它指向的内存地址, 理论上可以解引用到任意数据类型.
 
-**引用**是一个特殊的指针, 它的解引用访问是受限的, 只能解引用到它引用数据的类型, 不能用作它用. 
+**引用**是一个特殊的指针, 它的解引用访问是受限的, 只能解引用到它引用数据的类型, 不能用作它用.
 
 **智能指针**是一个表现行为很像指针的数据结构, 但除了指向数据的指针外, 它还有元数据以提供额外的处理能力.
 
 **在 `Rust` 中, 凡是需要做资源回收的数据结构, 且实现了 `Deref`/`DerefMut`/`Drop`, 都是智能指针.**
 
-比如用于在堆上分配内存的 `Box<T>` 和`Vec<T>`、用于引用计数的 `Rc<T>` 和 `Arc<T>` . 很多其他数据结构, 如 `PathBuf`、`Cow<'a, B>`、`MutexGuard`<T>``RwLockReadGuard<T>` 和 `RwLockWriteGuard<T>` 等也是智能指针
+比如用于在堆上分配内存的 `Box<T>` 和`Vec<T>`、用于引用计数的 `Rc<T>` 和 `Arc<T>` . 很多其他数据结构, 如 `PathBuf`、`Cow<'a, B>`、`MutexGuard<T>`,`RwLockReadGuard<T>` 和 `RwLockWriteGuard<T>` 等也是智能指针
 
 ```rust
 impl ops::Deref for String {
@@ -38,9 +38,9 @@ unsafe impl<#[may_dangle] T, A: Allocator> Drop for Vec<T, A> {
 }
 ```
 
-## 1. Box<T>
+## 1. `Box<T>`
 
-`Box` 的定义里, 内部就是一个 [Unique](https://doc.rust-lang.org/src/core/ptr/unique.rs.html#36-44) 用于致敬 C++, `Unique` 是一个私有的数据结构, 我们不能直接使用, 它包裹了一个 `*const T` 指针, 并唯一拥有这个指针. 
+`Box` 的定义里, 内部就是一个 [Unique](https://doc.rust-lang.org/src/core/ptr/unique.rs.html#36-44) 用于致敬 C++, `Unique` 是一个私有的数据结构, 我们不能直接使用, 它包裹了一个 `*const T` 指针, 并唯一拥有这个指针.
 
 ```rust
 pub struct Unique<T: ?Sized> {
@@ -66,9 +66,7 @@ unsafe impl<#[may_dangle] T: ?Sized, A: Allocator> Drop for Box<T, A> {
 }
 ```
 
-
-
-## 2. Cow<'a, B'>
+## 2. `Cow<'a, B'>`
 
 `Cow` 是 `Rust` 下用于提供写时克隆(**Clone-on-Write**)的一个智能指针, 它跟虚拟内存管理的写时复制(**Copy-on-write**)有异曲同工之妙: 包裹一个只读借用, 但如果调用者需要所有权或者需要修改内容, 那么它会 `clone` 借用的数据. 
 
@@ -173,11 +171,9 @@ impl<B: ?Sized + ToOwned> Deref for Cow<'_, B> {
 
 注意: **这种根据 enum 的不同状态来进行统一分发的方法是第三种分发手段**
 
-## 3. MutexGuard<T>
+## 3. `MutexGuard<T>`
 
 `String`、`Box<T>`、`Cow<'a, B>` 等智能指针, 都是通过 `Deref` 来提供良好的用户体验, 那么 `MutexGuard<T>` 是另外一类很有意思的智能指针: 它不但通过 `Deref` 提供良好的用户体验, 还通过 `Drop trait` 来确保, 使用到的内存以外的资源在退出时进行释放. 
-
-
 
 ```rust
 // 通过Mutex::lock时生成的
@@ -219,4 +215,3 @@ impl<T: ?Sized> Drop for MutexGuard<'_, T> {
     }
 }
 ```
-
