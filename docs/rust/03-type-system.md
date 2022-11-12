@@ -16,6 +16,8 @@
 - 强类型: 表明它不允许类型自动隐式转换,不同类型无法进行计算
 - 类型安全: 表明它保证运行时的内存安全, 只能按照被允许的方法, 访问它被授权访问的内存
 
+![image-20221112105907209](http://imgur.thinkgos.cn/imgur/202211121059386.png)
+
 ## 2 类型大小
 
 ### 2.1 可确定大小类型
@@ -181,13 +183,15 @@ fn main() {
 }
 ```
 
+![image-20221112112230032](http://imgur.thinkgos.cn/imgur/202211121122156.png)
+
 ## 7. 多态
 
-静态类型系统, 多态可以通过[参数多态（parametric polymorphism）](https://en.wikipedia.org/wiki/Parametric_polymorphism)、[特设多态（adhoc polymorphism）](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)和[子类型多态（subtype polymorphism）实现](https://en.wikipedia.org/wiki/Subtyping). 
+静态类型系统, 多态可以通过[**参数多态(parametric polymorphism)**](https://en.wikipedia.org/wiki/Parametric_polymorphism)、[**特设多态(adhoc polymorphism)**](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)和[**子类型多态(subtype polymorphism)实现**](https://en.wikipedia.org/wiki/Subtyping). 
 
-- **参数多态**是指, 代码操作的类型是一个满足某些约束的参数, 而非具体的类型. 
-- **特设多态**是指同一种行为有多个不同实现的多态. 比如加法, 可以 1+1, 也可以是 “abc” + “cde”、matrix1 + matrix2、甚至 matrix1 + vector1. 在面向对象编程语言中, 特设多态一般指函数的重载. 
-- **子类型多态**是指, 在运行时, 子类型可以被当成父类型使用. 
+- **参数多态**是指, 代码操作的类型是一个满足某些约束的参数, 而非具体的类型.  `Rust`通过泛型支持.
+- **特设多态**是指同一种行为有多个不同实现的多态. 比如加法, 可以 1+1, 也可以是 “abc” + “cde”、matrix1 + matrix2、甚至 matrix1 + vector1. 在面向对象编程语言中, 特设多态一般指函数的重载. `Rust`通过`trait`支持.
+- **子类型多态**是指, 在运行时, 子类型可以被当成父类型使用.  `Rust`通过`trait object`支持.
 
 在 `Rust` 中, **参数多态**通过泛型来支持、**特设多态**通过 `trait` 来支持、**子类型多态**可以用 `trait object` 来支持, 
 

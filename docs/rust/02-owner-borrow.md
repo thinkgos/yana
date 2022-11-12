@@ -1,8 +1,19 @@
-# 所有权机制-借用规则
+# 所有权机制
 
-## Copy语义和Move语义
+- **一个值只能被一个变量所拥有, 这个变量被称为所有者**(Each value in Rust has a variable that’s called its owner). 
+- **一个值同一时刻只能有一个所有者**(There can only be one owner at a time), 也就是说不能有两个变量拥有相同的值. 所以对应刚才说的变量赋值、参数传递、函数返回等行为, 旧的所有者会把值的所有权转移给新的所有者, 以便保证单一所有者的约束. 
+- **当所有者离开作用域**, 其拥有的值被丢弃(When the owner goes out of scope, the value will be dropped), 内存得到释放. 
 
-是否实现 `Copy Trait` 区分 Copy语义和Move语义
+## 1. Copy trait
+
+- 原生类型, 包括函数、不可变引用和裸指针实现了 Copy；
+- 数组和元组, 如果其内部的数据结构实现了 Copy, 那么它们也实现了 Copy；
+- 可变引用没有实现 Copy；
+- 非固定大小的数据结构, 没有实现 Copy
+
+## 2. Copy语义和Move语义
+
+是否实现 `Copy Trait` 区分 `Copy`语义和 `Move` 语义
 
 - `Copy`语义按位复制
 - `Copy`语义对应值类型
@@ -20,7 +31,7 @@ fn main() {
 }
 ```
 
-### Struct, Enum
+### 2.1 Struct, Enum
 
 #### Struct成员均实现Copy trait, 但rust并不会默认为struct实现copy
 
@@ -80,11 +91,11 @@ fn  main() {
 }
 ```
 
-### Tuple, Option, Array
+### 2.2 Tuple, Option, Array
 
 ***语言默认的,成员实现则其实现Copy  trait***
 
-#### Tuple
+#### 2.2.1 Tuple
 
 ```rust
 fn  main() {
@@ -98,7 +109,7 @@ fn  main() {
 }
 ```
 
-#### Arrary
+#### 2.2.2 Arrary
 
 ```rust
 fn main() {
@@ -128,11 +139,11 @@ fn foo(v: &mut [i32; 3]) {
 
 ```
 
-## 借用规则
+## 3. 借用规则
 
 - 借⽤的⽣命周期不能⻓于出借⽅.         --> 防⽌出现悬垂指针.
 - 可变借⽤不能有别名.                           --> 独占, 可变借⽤不能共享, 只能独占, 只能有⼀个.
 - 不可变借⽤可以多个共享.                    --> 共享不可变
 - 不可变借用和可变借用不可同时存在(作用域内).
 
-## 解引用操作会获取所有权
+## 4. 解引用操作会获取所有权

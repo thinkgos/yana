@@ -506,3 +506,12 @@ stack
 
 ## 17. Reference
  - [Rust数据内存布局](https://rustmagazine.github.io/rust_magazine_2021/chapter_6/ant-rust-data-layout.html)
+
+
+
+## 18. 生命周期
+
+![image-20221111224011998](http://imgur.thinkgos.cn/imgur/202211112240020.png)
+
+
+
