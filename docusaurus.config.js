@@ -110,11 +110,6 @@ const config = {
           },
           {
             position: 'left',
-            label: 'Rust',
-            to: "docs/rust",
-          },
-          {
-            position: 'left',
             label: 'Golang',
             to: "docs/golang",
           },
@@ -126,6 +121,11 @@ const config = {
           {
             to: '/blog',
             label: 'Blog',
+            position: 'left',
+          },
+          {
+            href: 'https://github.com/thinkgos/fragmentary-knowledge-collection',
+            label: 'Rust',
             position: 'left',
           },
           {
